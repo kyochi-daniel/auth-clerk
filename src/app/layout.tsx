@@ -1,6 +1,9 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
-
+import { ClerkProvider } from '@clerk/nextjs'
+import { ptBR } from '@clerk/localizations'
+import { neobrutalism} from '@clerk/themes'
+ 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -14,8 +17,14 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <ClerkProvider localization={ptBR} appearance={{ baseTheme: neobrutalism, elements: { formButtonPrimary: 'bg-green-500 hover:bg-green-600'} }} >
+      <html lang="en">
+        <body className={inter.className}>
+            <div className='h-screen flex justify-center items-center bg-slate-600'>
+              {children}
+            </div>
+        </body>
+      </html>
+    </ClerkProvider>
   )
 }
